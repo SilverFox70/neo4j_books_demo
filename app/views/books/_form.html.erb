@@ -15,25 +15,35 @@
     <%= f.label :isbn %><br>
     <%= f.text_field :isbn %>
   </div>
+
   <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
+
   <div class="field">
     <%= f.label :year_published %><br>
     <%= f.number_field :year_published %>
   </div>
+
   <div class="field">
     <%= f.label :author %><br>
     <%= f.select :author, options_from_collection_for_select(User.all, :id, :name,
     @book.author.try(:id)), include_blank: true %>
   </div>
+
   <div class="field">
     <%= f.label :category %><br>
     <%= f.select :category_ids, options_from_collection_for_select(Category.order(:name),
     :id, :name, @book.categories.map(&:id)), {include_blank: true},
-    {multiple: true, size: 5} %>
+    {multiple: true, size: Category.count} %>
   </div>
+
+   <div class="field">
+    <%= f.label :other_cat %><br>
+    <%= f.text_field :other_cat %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
