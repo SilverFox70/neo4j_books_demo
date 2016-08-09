@@ -2,3 +2,6 @@
 2016-08-08 18:04:46.049+0000 INFO  Bolt enabled on localhost:7472.
 2016-08-08 18:04:47.749+0000 INFO  Started.
 2016-08-08 18:04:48.417+0000 INFO  Remote interface available at http://localhost:7474/
+2016-08-08 21:11:44.307+0000 INFO  Neo4j Server shutdown initiated by request
+2016-08-08 21:11:44.319+0000 INFO  Stopping...
+2016-08-08 21:11:44.337+0000 INFO  Stopped.
