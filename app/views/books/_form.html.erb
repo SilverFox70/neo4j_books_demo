@@ -1,50 +1,83 @@
-<%= form_for(@book) do |f| %>
-  <% if @book.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h2>
+<div class="row">
+  <div class="col-md-3 well">
+    <%= form_for(@book) do |f| %>
+      <% if @book.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h2>
 
-      <ul>
-      <% @book.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+          <ul>
+          <% @book.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
+
+      <div class="field">
+        <%= f.label :isbn %><br>
+        <%= f.text_field :isbn %>
+      </div>
+
+      <div class="field">
+        <%= f.label :title %><br>
+        <%= f.text_field :title %>
+      </div>
+
+      <div class="field">
+        <%= f.label :year_published %><br>
+        <%= f.number_field :year_published %>
+      </div>
+
+      <div class="field">
+        <%= f.label :author %><br>
+        <%= f.select :author, options_from_collection_for_select(User.all, :id, :name,
+        @book.author.try(:id)), include_blank: true %>
+      </div>
+
+      <div class="field">
+        <%= f.label :category %><br>
+        <%= f.select :category_ids, options_from_collection_for_select(Category.order(:name),
+        :id, :name, @book.categories.map(&:id)), {include_blank: true},
+        {multiple: true, size: Category.count} %>
+      </div>
+
+       <div class="field">
+        <%= f.label :other_cat %><br>
+        <%= f.text_field :other_cat %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+    <% end %>
+  </div><!-- /.col-md-3 -->
+
+  <%= form_tag edit_book_path do %>
+    <div class="col-md-3 well">
+      <h3>Books:</h3>
+      <% @books.each do |book| %>
+        <p><%= label_tag(book.id, "#{book.title}") %>
+           <%= check_box_tag("#{book.title}", book.id) %>
+        </p>
+      <% end %>
+    </div><!-- /.col-md-3 -->
+
+    <div class="col-md-3 well">
+      <h3>Categories:</h3>
+      <% @categories.each do |category| %>
+        <p><%= category.name  %></p>
+      <% end %>
+    </div><!-- /.col-md-3 -->
+
+    <div class="col-md-3 well">
+      <h3>Authors:</h3>
+      <% @users.each do |user| %>
+        <p><%= user.name %></p>
+      <% end %>
+    </div><!-- /.col-md-3 -->
+    <%= submit_tag "Submit" %>
   <% end %>
+</div><!-- /.row -->
 
-  <div class="field">
-    <%= f.label :isbn %><br>
-    <%= f.text_field :isbn %>
-  </div>
 
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
 
-  <div class="field">
-    <%= f.label :year_published %><br>
-    <%= f.number_field :year_published %>
-  </div>
-
-  <div class="field">
-    <%= f.label :author %><br>
-    <%= f.select :author, options_from_collection_for_select(User.all, :id, :name,
-    @book.author.try(:id)), include_blank: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :category %><br>
-    <%= f.select :category_ids, options_from_collection_for_select(Category.order(:name),
-    :id, :name, @book.categories.map(&:id)), {include_blank: true},
-    {multiple: true, size: Category.count} %>
-  </div>
-
-   <div class="field">
-    <%= f.label :other_cat %><br>
-    <%= f.text_field :other_cat %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>

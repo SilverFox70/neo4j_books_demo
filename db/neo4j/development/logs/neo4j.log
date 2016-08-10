@@ -62,3 +62,10 @@ Caused by: org.neo4j.helpers.PortBindException: Address localhost:7472 is alread
 2016-08-09 23:57:43.749+0000 INFO  Neo4j Server shutdown initiated by request
 2016-08-09 23:57:43.759+0000 INFO  Stopping...
 2016-08-09 23:57:43.776+0000 INFO  Stopped.
+2016-08-10 17:36:06.331+0000 INFO  Starting...
+2016-08-10 17:36:07.509+0000 INFO  Bolt enabled on localhost:7472.
+2016-08-10 17:36:09.938+0000 INFO  Started.
+2016-08-10 17:36:10.608+0000 INFO  Remote interface available at http://localhost:7474/
+2016-08-10 20:27:28.203+0000 INFO  Neo4j Server shutdown initiated by request
+2016-08-10 20:27:28.215+0000 INFO  Stopping...
+2016-08-10 20:27:28.241+0000 INFO  Stopped.
