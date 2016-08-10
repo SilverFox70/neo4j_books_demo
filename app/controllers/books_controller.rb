@@ -20,6 +20,9 @@ class BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
+    @users = User.all
+    @books = Book.all
+    @categories = Category.all
   end
 
   # POST /books
@@ -43,17 +46,10 @@ class BooksController < ApplicationController
   def update
     bp = book_params
     categories = Category.where(:id => book_params[:category_ids]).pluck(:name)
-    p "---------------- category list -----------------"
-    categories.each do |cat|
-      p cat
-    end
     if categories.include?("New Category")
       new_category = Category.new(name: book_params[:other_cat])
       if new_category.save
         flash[:message] = "New Category Added."
-        p "-------------------- adding category ----------------"
-        p "new cat id: #{new_category.id}"
-        p "old cat id: #{Category.find_by(name: "New Category").id}"
         bp[:category_ids].delete("#{Category.find_by(name: "New Category").id}")
         bp[:category_ids] << "#{new_category.id}"
         p "bp: #{bp[:category_ids]}"
